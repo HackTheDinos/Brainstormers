@@ -1,6 +1,6 @@
 import bpy
 scene = bpy.context.scene
-initial_transparency = .8
+initial_transparency = .3
 transparency_decrease = initial_transparency/len(scene.objects)
 
 def sort_by_volume(objects):
@@ -41,7 +41,27 @@ def orient(obj):
 	obj.location[2]=0
 	obj.rotation_euler[0]=0
 
+def center_lamp():
+	lamp = get_lamp();
+	lamp.location = (0.0, 0.0, 0.0)
+	lamp.select = True
+	scene.objects.active = lamp
+
+def get_lamp():
+	for obj in scene.objects:
+		if obj.type == 'LAMP':
+			return obj
+	create_lamp()
+
+def create_lamp():
+	lamp_block = bpy.data.lamps.new(name="New Lamp", type="POINT")
+	lamp_object = bpy.data.object.new(name="New Lamp", object_data=lamp_block)
+	scene.object.link(lamp_object)
+	return lamp_object
+
+
 def run():
+	center_lamp()
 	sortedVolumes = sort_by_volume(scene.objects)
 	modify_objects(sortedVolumes)
 	print("Congrats - success!")
