@@ -1,4 +1,6 @@
 # Brainstormers
+Presentation: https://docs.google.com/presentation/d/1ri4NStsnLYXHR3CGkR8QbfmI8Q-Rj_AN-pWI2pbWOzI/edit#slide=id.p
+
 This project is divided into two parts: 
 	1. Automating detection of the volume of a brain given tiff files of a skull.
 	2. Scripting add-ons for Blender that allow users to compare multiple brains.
