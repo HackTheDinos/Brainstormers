@@ -12,11 +12,15 @@ def modify_objects(sortedVolumeTuples, number_of_objects):
 	transparency_decrease = transparency/number_of_objects
 	for volumeTuple in sortedVolumeTuples:
 		current_object = volumeTuple[0]
-		if current_object.active_material is None:
-			add_material(current_object)
-		decrease_transparency(current_object, transparency);
-		orient(current_object)
-		transparency -= transparency_decrease
+		if is_not_lamp_or_camera(current_object):
+			if current_object.active_material is None:
+				add_material(current_object)
+			decrease_transparency(current_object, transparency);
+			orient(current_object)
+			transparency -= transparency_decrease
+
+def is_not_lamp_or_camera(obj):
+	return obj.type != 'LAMP' and obj.type != 'CAMERA'
 
 def add_material(obj):
 		material = bpy.data.materials.new('material for ' + obj.name)
