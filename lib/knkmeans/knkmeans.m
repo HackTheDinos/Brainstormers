@@ -13,15 +13,15 @@ elseif size(init,1) == 1 && size(init,2) == n
 else
     error('ERROR: init is not valid.');
 end
-last = 0;
-while any(label ~= last)
+last = NaN;
+while any(isnan(last)) || any(label ~= last)
     [u,~,label] = unique(label);   % remove empty clusters
     k = length(u);
     E = sparse(label,1:n,1,k,n,n);
     E = bsxfun(@times,E,1./sum(E,2));
     T = E*K;
     Z = repmat(diag(T*E'),1,n)-2*T;
-    last = label;
+    last = label';
     [val, label] = min(Z,[],1);
 end
 [~,~,label] = unique(label);   % remove empty clusters
