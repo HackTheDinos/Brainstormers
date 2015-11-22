@@ -13,3 +13,4 @@ This project is divided into two parts:
 	TODO:
 		Convert script file to Blender add-on so that it can be accessed from the Blender option menu.
 		Align and scale brains.  Currently, all brains are centered, but are not necessarily facing the same direction.
+		Clean up code by extracting out classes.
